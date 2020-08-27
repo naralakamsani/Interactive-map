@@ -1,8 +1,11 @@
+#Make imports
 import folium
 import pandas
 
+#read the volcanoes file
+data = pandas.read_csv("Volcanoes.txt")
 
-data = pandas.read_csv("Volcanoes.txt")#reads the volcanoes file
+#Store the data extracted into separate vaariables
 lat = list(data["LAT"])
 lon = list(data["LON"])
 elev = list(data["ELEV"])
@@ -13,6 +16,7 @@ html = """<h4>Volcano Name: %s</h4>
 Height: %s m 
 """
 
+#Color returned based on the elevation of the volcano
 def color_producer():
     if el < 1000:
         return 'green'
@@ -25,7 +29,7 @@ def color_producer():
     elif el >= 1000:
         return 'blue'
 
-
+#Create the map using folium
 map = folium.Map(location=[38.58, -99.09], zoom_start=3, tiles="stamen toner")
 
 fgv = folium.FeatureGroup(name="Volcanoes")
